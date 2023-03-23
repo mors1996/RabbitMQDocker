@@ -24,3 +24,9 @@ services:
     build:
       context: .
       dockerfile: RabbitMQConsumer/RabbitMQConsumer/Dockerfile
+
+  rabbitmqconsumer2:
+    image: ${DOCKER_REGISTRY-}rabbitmqconsumer
+    build:
+      context: .
+      dockerfile: RabbitMQConsumer/RabbitMQConsumer/Dockerfile

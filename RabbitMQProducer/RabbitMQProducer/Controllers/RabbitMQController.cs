@@ -34,12 +34,14 @@ namespace RabbitMQProducer.Controllers
                                  autoDelete: false,
                                  arguments: null);
 
-            var body = Encoding.UTF8.GetBytes(msg);
 
             for(var i=0; i<1000; i++)
             {
                 var props = channel.CreateBasicProperties();
                 props.Persistent = false; // or props.DeliveryMode = 2;
+                var msgNum = msg +  " #" + i;
+                var body = Encoding.UTF8.GetBytes(msgNum);
+
 
                 channel.BasicPublish(exchange: string.Empty,
                                      routingKey: "DefaultQueue",
