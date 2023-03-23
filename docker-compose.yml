@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+        image: rabbitmq:3-management
+        hostname: rabbitmq
+        volumes:
+            - ./rabbitmq/etc/definitions.json:/etc/rabbitmq/defu.json
+            - ./rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+            - ./rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit
+            - ./rabbitmq/logs:/var/log/rabbitmq/log
+        ports:
+            - 5672:5672
+            - 15672:15672
+
+  rabbitmqproducer:
+    image: ${DOCKER_REGISTRY-}rabbitmqproducer
+    build:
+      context: .
+      dockerfile: RabbitMQProducer/RabbitMQProducer/Dockerfile
+
+  rabbitmqconsumer:
+    image: ${DOCKER_REGISTRY-}rabbitmqconsumer
+    build:
+      context: .
+      dockerfile: RabbitMQConsumer/RabbitMQConsumer/Dockerfile
