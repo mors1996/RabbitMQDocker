@@ -36,11 +36,17 @@ namespace RabbitMQProducer.Controllers
 
             var body = Encoding.UTF8.GetBytes(msg);
 
-            channel.BasicPublish(exchange: string.Empty,
-                                 routingKey: "DefaultQueue",
-                                 basicProperties: null,
-                                 body: body);
-            Console.WriteLine($" [x] Sent {msg}");
+            for(var i=0; i<1000; i++)
+            {
+                var props = channel.CreateBasicProperties();
+                props.Persistent = false; // or props.DeliveryMode = 2;
+
+                channel.BasicPublish(exchange: string.Empty,
+                                     routingKey: "DefaultQueue",
+                                     basicProperties: props,
+                                     body: body);
+                Console.WriteLine($" [x] Sent {msg}");
+            }
         }
     }
 }
