@@ -5,10 +5,10 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["RabbitMQConsumer.csproj", "."]
-RUN dotnet restore "./RabbitMQConsumer.csproj"
+COPY ["RabbitMQConsumer/RabbitMQConsumer/RabbitMQConsumer.csproj", "RabbitMQConsumer/RabbitMQConsumer/"]
+RUN dotnet restore "RabbitMQConsumer/RabbitMQConsumer/RabbitMQConsumer.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/RabbitMQConsumer/RabbitMQConsumer"
 RUN dotnet build "RabbitMQConsumer.csproj" -c Release -o /app/build
 
 FROM build AS publish

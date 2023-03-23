@@ -7,10 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["RabbitMQProducer.csproj", "."]
-RUN dotnet restore "./RabbitMQProducer.csproj"
+COPY ["RabbitMQProducer/RabbitMQProducer/RabbitMQProducer.csproj", "RabbitMQProducer/RabbitMQProducer/"]
+RUN dotnet restore "RabbitMQProducer/RabbitMQProducer/RabbitMQProducer.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/RabbitMQProducer/RabbitMQProducer"
 RUN dotnet build "RabbitMQProducer.csproj" -c Release -o /app/build
 
 FROM build AS publish

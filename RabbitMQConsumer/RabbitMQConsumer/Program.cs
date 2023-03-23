@@ -2,7 +2,7 @@
 using RabbitMQ.Client;
 using System.Text;
 using RabbitMQ.Client.Events;
-Thread.Sleep(5000);
+Thread.Sleep(30000);
 
 
 
